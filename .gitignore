@@ -14,3 +14,4 @@ __pycache__
 # Credentials
 client_secret.json
 token.pkl
+setup.py

@@ -32,6 +32,12 @@ query = {
                 'checkbox': {
                     'equals': True
                 }
+            },
+            {
+                'property': NOTION_NEEDS_GCAL_UPDATE,
+                'checkbox': {
+                    'equals': True
+                }
             }
         ]
     }
@@ -72,7 +78,7 @@ for i, cancelledPage in enumerate(cancelledNotionPages['results']):
         print(f'Deleting this event from Google Calendar: {cancelledPageName}\n')
         service.events().delete(calendarId=gCalCalendarId, eventId=gCalEventId).execute() 
     except:
-        print(f'Could not delete this event from Google Calendar (it was likely deleted already): {cancelledPageName}\n')
+        print(f'Could not delete this event from Google Calendar: {cancelledPageName}\n')
 
 # Check off the 'Cancelled' checkbox for events that were deleted in Google Calendar
 
@@ -122,7 +128,7 @@ for deletedGCalEvent in deletedGCalEvents:
     )
 
     for notionPageToDelete in notionPagesToDelete['results']:
-        print(f'Cancelling this event in Notion Calendar: {deletedGCalEventId}')
+        print(f'Cancelling this event in Notion Calendar: {deletedGCalEventId}\n')
 
         notionPageUpdate = notion.pages.update(
             **{
@@ -131,6 +137,13 @@ for deletedGCalEvent in deletedGCalEvents:
                     NOTION_CANCELLED: {
                         'type': 'checkbox',
                         'checkbox': True
+                    },
+                    NOTION_LAST_SYNCED: {
+                        'type': 'date',
+                        'date': {
+                            'start': addTimeZoneForNotion(nowToDateTimeString()),
+                            'end': None
+                        }
                     }
                 }
             }

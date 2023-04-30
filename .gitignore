@@ -6,7 +6,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Other
 .vscode/
+__pycache__
 
 # Credentials
 client_secret.json

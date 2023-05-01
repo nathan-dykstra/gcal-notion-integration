@@ -6,6 +6,10 @@ Hey everyone! This is an integration between Notion and Google Calendar that I'v
 
 Right off the bat, I want to give some credit to [akarri2001](https://github.com/akarri2001). I've been looking for a Notion + Google Calendar integration for a while, but I haven't been satisfied with the free tier of products like Zapier. When I decided to create my own, I came across [akarri2001's](https://github.com/akarri2001) [Notion-and-Google-Calendar-2-Way-Sync](https://github.com/akarri2001/Notion-and-Google-Calendar-2-Way-Sync) project. That helped me a lot with setting up the API connections and gave me tons of inspiration for how to organize my code and implement some of the features. Cheers [akarri2001](https://github.com/akarri2001)!
 
+I hope you find this useful! Feel free to add suggestions for features you would like, and I will consider adding them. Or dig into the code and modify it however you want on your own :)
+
+FYI I will also be working on a Google Tasks + Notion feature to sync your tasks, reminders, and to-dos.
+
 ## Features
 - Sync Google Calendar events to Notion calendar database.
   - Synced events will be updated in Notion if you change them in Google Calendar.
@@ -62,7 +66,3 @@ Step-by-step setup instructions will be available shortly. The setup process wil
   - If you scheduled the program, then you will notice that the code isn't running and your events aren't syncing. You'll have to manually run the program once, and follow the steps in the bullet point above.
     - I'll try to figure out if it's possible to make it notify you somehow when this happens.
 - You'll notice that several properties are hidden by default in the Notion calendar event pages. They help facilitate the sync and are updated automatically when running the program. Please do not edit the content of those properties, or the program might not function correctly!
-
-I hope you find this useful! Feel free to add suggestions for features you would like, and I will consider adding them. Or dig into the code and modify it however you want on your own :)
-
-FYI I will also be working on a Google Tasks + Notion feature to sync your tasks, reminders, and to-dos.

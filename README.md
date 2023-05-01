@@ -18,7 +18,7 @@ Right off the bat, I want to give credit to [akarri2001](https://github.com/akar
   - The program will only look in these calendars when adding/updating events in Notion.
   - If an event is shared with your Google Calendar, it will be added to the "Unknown" calendar tag in Notion since the event is actually owned by the calendar that shared it with you, not your calendar.
   - Supports changing events from one calendar to another (in Notion and Google Calendar).
-- Ability to delete/cancel events and sync those changes* (see limitations).
+- Syncs cancelled/deleted events* (see limitations).
 - Can create and sync events with a single date only, or a single date + time, or two dates, or two dates + times.
   - Events will be added as "All-Day" events in Google Calendar when appropriate.
 - No date limits on what events will be synced - you can sync all of your historical and future events if you want! (Up to 500 events per calendar for the Google to Notion sync).

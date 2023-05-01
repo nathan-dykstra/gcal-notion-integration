@@ -58,13 +58,13 @@ for calendar in CALENDAR_DICTIONARY.keys(): # Only get Google Calendar info for 
         minDate = addTimeZoneForNotion(dateTimeToString(datetime.now() - timedelta(weeks=PAST_WEEKS_TO_SYNC)))
 
         if PAST_WEEKS_TO_SYNC >= 0 and FUTURE_WEEKS_TO_SYNC >= 0:
-            gCalEventResults = service.events().list(calendarId=CALENDAR_DICTIONARY[calendar], singleEvents=True, orderBy='startTime', timeMax=maxDate, timeMin=minDate).execute()
+            gCalEventResults = service.events().list(calendarId=CALENDAR_DICTIONARY[calendar], singleEvents=True, orderBy='startTime', maxResults=500, timeMax=maxDate, timeMin=minDate).execute()
         elif PAST_WEEKS_TO_SYNC >= 0:
-            gCalEventResults = service.events().list(calendarId=CALENDAR_DICTIONARY[calendar], singleEvents=True, orderBy='startTime', timeMin=minDate).execute()
+            gCalEventResults = service.events().list(calendarId=CALENDAR_DICTIONARY[calendar], singleEvents=True, orderBy='startTime', maxResults=500, timeMin=minDate).execute()
         elif FUTURE_WEEKS_TO_SYNC >= 0:
-            gCalEventResults = service.events().list(calendarId=CALENDAR_DICTIONARY[calendar], singleEvents=True, orderBy='startTime', timeMax=maxDate).execute()
+            gCalEventResults = service.events().list(calendarId=CALENDAR_DICTIONARY[calendar], singleEvents=True, orderBy='startTime', maxResults=500, timeMax=maxDate).execute()
         else:
-            gCalEventResults = service.events().list(calendarId=CALENDAR_DICTIONARY[calendar], singleEvents=True, orderBy='startTime').execute()
+            gCalEventResults = service.events().list(calendarId=CALENDAR_DICTIONARY[calendar], singleEvents=True, orderBy='startTime', maxResults=500).execute()
         
         gCalEvents.extend(gCalEventResults['items'])
     

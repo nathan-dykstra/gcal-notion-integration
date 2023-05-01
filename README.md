@@ -42,8 +42,8 @@ Step-by-step setup instructions will be available shortly. The setup process wil
   - You can manually run the script to re-authenticate by running `python gCalApiToken.py`.
   - If you are running the program manually, then it should prompt you to follow a URL to re-authenticate your Google account which will give you a code to paste back into the command prompt or terminal (just like when you set it up)
   - If you have scheduled the program, then you will notice that the code is not running and your events are not syncing. You'll have to manually run the program once, and follow the steps in the bullet point above.
-    - I'll try to figure out if it's possible to make it notify you somehow when this happens
-- You'll notice that several fields are hidden in the Notion calendar event page. The fields help to facilitate the sync and are updated automatically when running the program. Please do not edit the content of these fields, or the program might not function correctly!
+    - I'll try to figure out if it's possible to make it notify you somehow when this happens.
+- You'll notice that several fields are hidden by default in the Notion calendar event page. Those fields help facilitate the sync and are updated automatically when running the program. Please do not edit the content of those fields, or the program might not function correctly!
 
 I hope you find this useful! Feel free to add suggestions for features you would like, and I will consider adding them. Or dig into the code and modify it however you want :)
 

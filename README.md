@@ -44,7 +44,9 @@ Right off the bat, I want to give some credit to [akarri2001](https://github.com
 
 ## Setup Instructions
 
-Step-by-step setup instructions will be available shortly. The setup process will probably take around 30 minutes. It does involve editing a few lines of code, but the changes are very minor and will be well-documented in the instructions - so even if you are not super tech savvy, you can probably still get it working!
+To run: `python syncGCalAndNotion.py`.
+
+Step-by-step setup instructions will be available shortly. The setup process will probably take around 30 minutes. It does involve editing a few lines of code, but the changes are very minor and will be well-documented in the instructions - so even if you are not tech savvy, you can probably still get it working!
 
 ## Usage Notes
 - You'll have to use my Notion calendar database template that will be provided in the instructions, but you can change the field names if you'd like - instructions will be found in the setup documentation.

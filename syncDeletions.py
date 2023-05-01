@@ -80,6 +80,20 @@ for i, cancelledPage in enumerate(cancelledNotionPages['results']):
     except:
         print(f'Could not delete this event from Google Calendar: {cancelledPageName}\n')
 
+    notionPageUpdate = notion.pages.update(
+        **{
+            'page_id': cancelledPage['id'],
+            'properties': {
+                NOTION_LAST_SYNCED: {
+                    'date': {
+                        'start': addTimeZoneForNotion(nowToDateTimeString()),
+                        'end': None
+                    }
+                }
+            }
+        }
+    )
+
 # Check off the 'Cancelled' checkbox for events that were deleted in Google Calendar
 
 deletedGCalEvents = []

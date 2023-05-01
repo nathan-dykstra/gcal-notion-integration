@@ -12,15 +12,17 @@ Right off the bat, I want to give credit to [akarri2001](https://github.com/akar
   - No limit on what events will be synced - you can sync all of your historical and future events if you want! (Up to 500 events per calendar).
 - Sync your Notion Calendar events to your Google Calendar (including importing your past events).
   - Synced events will be updated in Google Calendar if you change them in Notion.
-- No date limits on what events will be synced - you can sync all of your historical and future events if you want! (Up to 500 events per calendar for the Google to Notion sync).
-- Ability to add date ranges, so after your initial sync, the program will only sync dates that are a specified number of weeks into the past/future - makes the program run much quicker (and you will probably never update past events anyways).
+- Syncs the following fields: event name, description, location, creator, attendees, Google Meet link* (see limitations), and some other fields that make the integration work.
 - Multiple calendar support:
   - Specify each Google Calendar you would like to sync with Notion.
   - The program will only look in these calendars when adding/updating events in Notion.
   - If an event is shared with your Google Calendar, it will be added to the "Unknown" calendar tag in Notion since the event is actually owned by the calendar that shared it with you, not your calendar.
   - Supports changing events from one calendar to another (in Notion and Google Calendar).
+- Ability to delete/cancel events and sync those changes* (see limitations).
 - Can create and sync events with a single date only, or a single date + time, or two dates, or two dates + times.
   - Events will be added as "All-Day" events in Google Calendar when appropriate.
+- No date limits on what events will be synced - you can sync all of your historical and future events if you want! (Up to 500 events per calendar for the Google to Notion sync).
+- Ability to add date ranges, so after your initial sync, the program will only sync dates that are a specified number of weeks into the past/future - makes the program run much quicker (and you will probably never update past events anyways).
 - Set the program to run at scheduled intervals using tools like Windows Event Scheduler (instructions for how to do this will be included in the "Setup Instructions" section when I finish that documentation)
 
 ## Limitations
@@ -29,6 +31,10 @@ Right off the bat, I want to give credit to [akarri2001](https://github.com/akar
 - Recurring Google Calendar events are broken up into their individual occurrences when synced with Notion. Unfortunately Notion does not currently have a recurring event feature (so if you have a Google Calendar event that repeats 10 times, then you'll end up with 10 separate events in Notion)
   - The event info will all sync properly, you'll just end up with a bunch of identical events in Notion, except they're on different dates.
   - If Notion adds recurring events then I might update the program to add proper support.
+- The Notion API does not allow deleting pages. To sync deleted events, I added a "Cancelled" field in Notion.
+  - When an event is deleted in Google Calendar, the "Cancelled" checkbox will be checked in Notion.
+  - When the "Cancelled" checkbox is checked in Notion, the event will be deleted from Google Calendar.
+  - The Notion calendar database views are set up to filter out "Cancelled" events, so you won't see them by default.
 
 ## Setup Instructions
 
@@ -40,7 +46,7 @@ Step-by-step setup instructions will be available shortly. The setup process wil
   - This is one of the reasons why I recommend only doing a full sync without date restrictions the first time you run the program.
 - Just like your Google apps, you will have to re-authenticate your Google account every few weeks.
   - You can manually run the script to re-authenticate by running `python gCalApiToken.py`.
-  - If you are running the program manually, then it should prompt you to follow a URL to re-authenticate your Google account which will give you a code to paste back into the command prompt or terminal (just like when you set it up)
+  - If you are running the program manually, then it should prompt you to follow a URL to re-authenticate your Google account which will give you a code to paste back into the command prompt or terminal (just like when you set it up).
   - If you have scheduled the program, then you will notice that the code is not running and your events are not syncing. You'll have to manually run the program once, and follow the steps in the bullet point above.
     - I'll try to figure out if it's possible to make it notify you somehow when this happens.
 - You'll notice that several fields are hidden by default in the Notion calendar event page. Those fields help facilitate the sync and are updated automatically when running the program. Please do not edit the content of those fields, or the program might not function correctly!

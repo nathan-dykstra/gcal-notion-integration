@@ -33,9 +33,9 @@ Right off the bat, I want to give some credit to [akarri2001](https://github.com
   - The event info will all sync properly, you'll just end up with a bunch of identical events in Notion, except they're on different dates.
   - If Notion adds recurring events then I might update the program to add proper support.
 - You'll have to use my Notion calendar database template (which will be provided in the instructions).
-  - You can change the property names if you'd like (see setup instructions when they are released)
+  - You can change the property names if you'd like (see setup instructions when they are released).
   - You can also add extra properties to the Notion database, but they will not be synced with Google Calendar.
-  - If you have an existing Notion calendar database, you can modify the properties to make it work with this sync program (see setup instructions when they are released)
+  - If you have an existing Notion calendar database, you can modify the properties to make it work with this program (see setup instructions when they are released).
 - The Notion API does not allow deleting pages. To sync deleted events, I added a "Cancelled" property in Notion.
   - When an event is deleted in Google Calendar, the "Cancelled" checkbox will be checked in Notion.
   - When the "Cancelled" checkbox is checked in Notion, the event will be deleted from Google Calendar.

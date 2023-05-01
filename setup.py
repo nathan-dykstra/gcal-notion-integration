@@ -57,8 +57,8 @@ DEFAULT_CALENDAR_NAME = ''
 DEFAULT_CALENDAR_ID = ''
 
 # Notion Calendar name and ID used for events that are shared from a Google Calendar that you don't own
-UNKNOWN_CALENDAR_NAME = ''
-UNKNOWN_CALENDAR_ID = ''
+UNKNOWN_CALENDAR_NAME = 'Unknown'
+UNKNOWN_CALENDAR_ID = 'unknown'
 
 # These are all of the Google Calendars you want to sync with your Notion Calendar database
 # Format: 'Notion Calendar Name' : 'Google Calendar ID'

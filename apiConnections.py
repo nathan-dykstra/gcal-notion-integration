@@ -33,5 +33,5 @@ except:
 
 # Set up the Notion API connection
 
-os.environ['NOTION_TOKEN'] = NOTION_TOKEN
-notion = Client(auth=os.environ['NOTION_TOKEN'])
+#os.environ['NOTION_TOKEN'] = NOTION_TOKEN
+notion = Client(auth=NOTION_TOKEN)

@@ -147,7 +147,6 @@ if len(notionPagesResults) > 0:
                         }
                     },
                     NOTION_CREATOR: {
-                        'type': 'select',
                         'select': {
                             'name': updatedGCalEvent['creator']['email'],
                             'color': 'default'

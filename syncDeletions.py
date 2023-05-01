@@ -17,7 +17,7 @@ query = {
         'and':[
             {
                 'property': NOTION_GCAL_EVENT_ID,
-                'text': {
+                'rich_text': {
                     'is_not_empty': True
                 }
             },
@@ -135,11 +135,9 @@ for deletedGCalEvent in deletedGCalEvents:
                 'page_id': notionPageToDelete['id'],
                 'properties': {
                     NOTION_CANCELLED: {
-                        'type': 'checkbox',
                         'checkbox': True
                     },
                     NOTION_LAST_SYNCED: {
-                        'type': 'date',
                         'date': {
                             'start': addTimeZoneForNotion(nowToDateTimeString()),
                             'end': None

@@ -75,7 +75,6 @@ notionAttendees = []
 notionPageUrls = []
 gCalEventIds = []
 notionCalendars = []
-notionCreateGoogleMeets = []
 
 if len(notionPagesResults) > 0:
     for i, page in enumerate(notionPagesResults):
@@ -168,7 +167,6 @@ if len(notionPagesResults) > 0:
                         }
                     },
                     NOTION_CREATOR: {
-                        'type': 'select',
                         'select': {
                             'name': newGCalEvent['creator']['email'],
                             'color': 'default'

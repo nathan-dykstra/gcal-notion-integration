@@ -146,11 +146,11 @@ def makeGCalEvent(eventName, eventDescription, eventStartTime, sourceUrl, eventE
         }
     else:
         event['start'] = {
-            'date': eventStartTime.strftime('%Y-%m-%dT%H:%M:%S'),
+            'dateTime': eventStartTime.strftime('%Y-%m-%dT%H:%M:%S'),
             'timeZone': TIMEZONE
         }
         event['end'] = {
-            'date': eventEndTime.strftime('%Y-%m-%dT%H:%M:%S'),
+            'dateTime': eventEndTime.strftime('%Y-%m-%dT%H:%M:%S'),
             'timeZone': TIMEZONE
         }
 
@@ -191,10 +191,8 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
             },
             'properties': {
                 NOTION_EVENT_NAME: {
-                    'type': 'title',
                     'title': [
                         {
-                            'type': 'text',
                             'text': {
                                 'content': eventName
                             }
@@ -202,24 +200,20 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                     ]
                 },
                 NOTION_CALENDAR_NAME: {
-                    'type': 'select',
                     'select': {
                         'name': notionCalendarName
                     }
                 },
                 NOTION_CREATOR: {
-                    'type': 'select',
                     'select': {
                         'name': eventCreator,
                         'color': 'default'
                     }
                 },
                 NOTION_ATTENDEES: {
-                    'type': 'multi_select',
                     'multi_select': [{'name': eventAttendees[i], 'color': 'default'} for i in range(len(eventAttendees))]
                 },
                 NOTION_LOCATION: {
-                    'type': 'rich_text',
                     'rich_text': [{
                         'text': {
                             'content': eventLocation
@@ -227,7 +221,6 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                     }]
                 },
                 NOTION_DESCRIPTION: {
-                    'type': 'rich_text',
                     'rich_text': [{
                         'text': {
                             'content': eventDescription
@@ -235,11 +228,9 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                     }]
                 },
                 NOTION_SYNCED: {
-                    'type': 'checkbox',
                     'checkbox': True
                 },
                 NOTION_GCAL_EVENT_ID: {
-                    'type': 'rich_text',
                     'rich_text': [{
                         'text': {
                             'content': gCalEventId
@@ -247,7 +238,6 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                     }]
                 },
                 NOTION_GCAL_CALENDAR_ID: {
-                    'type': 'rich_text',
                     'rich_text': [{
                         'text': {
                             'content': gCalCalendarId
@@ -255,7 +245,6 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                     }]
                 },
                 NOTION_LAST_SYNCED: {
-                    'type': 'date',
                     'date': {
                         'start': addTimeZoneForNotion(nowToDateTimeString()),
                         'end': None
@@ -271,7 +260,6 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                 'page_id': newNotionEvent['id'],
                 'properties': {
                     NOTION_VIDEO_CALL_LINK: {
-                        'type': 'rich_text',
                         'rich_text': [{
                             'text': {
                                 'content': eventCallLink,
@@ -296,7 +284,6 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                 'page_id': newNotionEvent['id'],
                 'properties': {
                     NOTION_DATE: {
-                        'type': 'date',
                         'date': {
                             'start': dateToString(eventStartTime),
                             'end': None
@@ -313,7 +300,6 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                 'page_id': newNotionEvent['id'],
                 'properties': {
                     NOTION_DATE: {
-                        'type': 'date',
                         'date': {
                             'start': dateToString(eventStartTime),
                             'end': dateToString(eventEndTime)
@@ -328,7 +314,6 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                 'page_id': newNotionEvent['id'],
                 'properties': {
                     NOTION_DATE: {
-                        "type": 'date',
                         'date': {
                             'start': addTimeZoneForNotion(dateTimeToString(eventStartTime)),
                             'end': None
@@ -343,7 +328,6 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
                 'page_id': newNotionEvent['id'],
                 'properties': {
                     NOTION_DATE: {
-                        'type': 'date',
                         'date': {
                             'start': addTimeZoneForNotion(dateTimeToString(eventStartTime)),
                             'end': addTimeZoneForNotion(dateTimeToString(eventEndTime))
@@ -359,6 +343,13 @@ def makeNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescription
 
 def updateGCalEvent(eventName, eventDescription, eventStartTime, eventEndTime, gCalEventId, currentGCalId, newGCalId, eventLocation, eventCallLink, eventAttendees):
     """Updates the Google Calendar event and returns the event"""
+
+    event = {
+        'summary': eventName,
+        'description': eventDescription,
+        'location': eventLocation,
+        'attendees': [{'email': attendee} for attendee in eventAttendees]
+    }
     
     # Three cases for the start/end dates:
     #   1. The Notion Calendar event has one date without time
@@ -368,51 +359,33 @@ def updateGCalEvent(eventName, eventDescription, eventStartTime, eventEndTime, g
         eventStartTime = datetime.combine(eventStartTime, datetime.min.time())
         eventEndTime = eventEndTime + timedelta(days=1)
 
-        event = {
-            'summary': eventName,
-            'description': eventDescription,
-            'start': {
-                'date': eventStartTime.strftime("%Y-%m-%d"),
-                'timeZone': TIMEZONE
-            },
-            'end': {
-                'date': eventEndTime.strftime("%Y-%m-%d"),
-                'timeZone': TIMEZONE
-            }, 
-            'location': eventLocation,
-            'attendees': [{'email': attendee} for attendee in eventAttendees]
+        event['start'] = {
+            'date': eventStartTime.strftime('%Y-%m-%d'),
+            'timeZone': TIMEZONE
+        }
+        event['end'] = {
+            'date': eventEndTime.strftime('%Y-%m-%d'),
+            'timeZone': TIMEZONE
         }
     elif eventStartTime.hour == 0 and eventStartTime.minute ==  0 and eventEndTime.hour == 0 and eventEndTime.minute == 0 and eventStartTime != eventEndTime:
         eventEndTime = eventEndTime + timedelta(days=1)
-        
-        event = {
-            'summary': eventName,
-            'description': eventDescription,
-            'start': {
-                'date': eventStartTime.strftime("%Y-%m-%d"),
-                'timeZone': TIMEZONE
-            },
-            'end': {
-                'date': eventEndTime.strftime("%Y-%m-%d"),
-                'timeZone': TIMEZONE
-            }, 
-            'location': eventLocation,
-            'attendees': [{'email': attendee} for attendee in eventAttendees]
+
+        event['start'] = {
+            'date': eventStartTime.strftime('%Y-%m-%d'),
+            'timeZone': TIMEZONE
+        }
+        event['end'] = {
+            'date': eventEndTime.strftime('%Y-%m-%d'),
+            'timeZone': TIMEZONE
         }
     else:
-        event = {
-            'summary': eventName,
-            'description': eventDescription,
-            'start': {
-                'dateTime': eventStartTime.strftime("%Y-%m-%dT%H:%M:%S"),
-                'timeZone': TIMEZONE
-            },
-            'end': {
-                'dateTime': eventEndTime.strftime("%Y-%m-%dT%H:%M:%S"),
-                'timeZone': TIMEZONE
-            }, 
-            'location': eventLocation,
-            'attendees': [{'email': attendee} for attendee in eventAttendees]
+        event['start'] = {
+            'dateTime': eventStartTime.strftime('%Y-%m-%dT%H:%M:%S'),
+            'timeZone': TIMEZONE
+        }
+        event['end'] = {
+            'dateTime': eventEndTime.strftime('%Y-%m-%dT%H:%M:%S'),
+            'timeZone': TIMEZONE
         }
 
     # TODO: get Notion-to-Google conference link working
@@ -466,10 +439,8 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
             'page_id': notionPageId,
             'properties': {
                 NOTION_EVENT_NAME: {
-                    'type': 'title',
                     'title': [
                         {
-                            'type': 'text',
                             'text': {
                                 'content': eventName
                             }
@@ -477,24 +448,20 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                     ]
                 },
                 NOTION_CALENDAR_NAME: {
-                    'type': 'select',
                     'select': {
                         'name': notionCalendarName
                     }
                 },
                 NOTION_CREATOR: {
-                    'type': 'select',
                     'select': {
                         'name': eventCreator,
                         'color': 'default'
                     }
                 },
                 NOTION_ATTENDEES: {
-                    'type': 'multi_select',
                     'multi_select': [{'name': eventAttendees[i], 'color': 'default'} for i in range(len(eventAttendees))]
                 },
                 NOTION_LOCATION: {
-                    'type': 'rich_text',
                     'rich_text': [{
                         'text': {
                             'content': eventLocation
@@ -502,7 +469,6 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                     }]
                 },
                 NOTION_DESCRIPTION: {
-                    'type': 'rich_text',
                     'rich_text': [{
                         'text': {
                             'content': eventDescription
@@ -510,11 +476,9 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                     }]
                 },
                 NOTION_SYNCED: {
-                    'type': 'checkbox',
                     'checkbox': True
                 },
                 NOTION_GCAL_CALENDAR_ID: {
-                    'type': 'rich_text',
                     'rich_text': [{
                         'text': {
                             'content': gCalCalendarId
@@ -522,7 +486,6 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                     }]
                 },
                 NOTION_LAST_SYNCED: {
-                    'type': 'date',
                     'date': {
                         'start': addTimeZoneForNotion(nowToDateTimeString()),
                         'end': None
@@ -538,7 +501,6 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                 'page_id': notionPageId,
                 'properties': {
                     NOTION_VIDEO_CALL_LINK: {
-                        'type': 'rich_text',
                         'rich_text': [{
                             'text': {
                                 'content': eventCallLink,
@@ -563,7 +525,6 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                 'page_id': notionPageId,
                 'properties': {
                     NOTION_DATE: {
-                        'type': 'date',
                         'date': {
                             'start': dateToString(eventStartTime),
                             'end': None
@@ -580,7 +541,6 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                 'page_id': notionPageId,
                 'properties': {
                     NOTION_DATE: {
-                        'type': 'date',
                         'date': {
                             'start': dateToString(eventStartTime),
                             'end': dateToString(eventEndTime)
@@ -595,7 +555,6 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                 'page_id': notionPageId,
                 'properties': {
                     NOTION_DATE: {
-                        "type": 'date',
                         'date': {
                             'start': addTimeZoneForNotion(dateTimeToString(eventStartTime)),
                             'end': None
@@ -610,7 +569,6 @@ def updateNotionCalEvent(eventName, eventStartTime, eventEndTime, eventDescripti
                 'page_id': notionPageId,
                 'properties': {
                     NOTION_DATE: {
-                        'type': 'date',
                         'date': {
                             'start': addTimeZoneForNotion(dateTimeToString(eventStartTime)),
                             'end': addTimeZoneForNotion(dateTimeToString(eventEndTime))

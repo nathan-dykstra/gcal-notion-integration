@@ -8,9 +8,9 @@ from helperFunctions import *
 ####################################################################
 
 
-print("Adding new Google Calendar events to Notion Calendar...\n")
+print("Adding new Google Calendar events to Notion...\n")
 
-# Get all Notion Calendar events that aren't cancelled
+# Get all Notion calendar events that aren't cancelled
 
 query = {
     'database_id': NOTION_DATABASE_ID,
@@ -127,8 +127,8 @@ for gCalEvent in gCalEvents:
     except:
         gCalAttendees.append([])
 
-# Compare the event IDs from Google Calendar to the event IDs currently in Notion.
-# If an event ID from Google Calendar does not exist in Notion, then that event should be added to the Notion Calendar
+# Compare the event IDs from Google Calendar to the event IDs currently in Notion
+# If an event ID from Google Calendar does not exist in Notion, then that event should be added to Notion
 
 newGCalEventIndicies = []
 
@@ -141,6 +141,6 @@ if len(newGCalEventIndicies) > 0:
         # Create the Notion Calendar event
         newNotionCalEvent = makeNotionCalEvent(gCalEventNames[index], gCalStartDates[index], gCalEndDates[index], gCalDescriptions[index], gCalLocations[index], gCalCallLinks[index], gCalCreators[index], gCalAttendees[index], gCalEventIds[index], gCalCalendarIds[index], notionCalendarNames[index])
     
-    print("Finished adding new Google Calendar events to Notion Calendar!\n")
+    print("Finished adding new Google Calendar events to Notion!\n")
 else:
-    print("There are no new Google Calendar events to add to Notion Calendar\n")
+    print("No new Google Calendar events to add to Notion\n")

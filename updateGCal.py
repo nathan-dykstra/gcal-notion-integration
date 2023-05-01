@@ -9,7 +9,7 @@ from helperFunctions import *
 
 print("Updating Google Calendar events that were changed in Notion...\n")
 
-# Get all of your Notion Calendar events that need to be updated in Google Calendar
+# Get all of your Notion calendar events that need to be updated in Google Calendar
 
 query = {
     'database_id': NOTION_DATABASE_ID, 
@@ -135,7 +135,7 @@ if len(notionPagesResults) > 0:
         # Update the Google Calendar event
         updatedGCalEvent = updateGCalEvent(notionEventNames[i], notionDescriptions[i], notionStartDates[i], notionEndDates[i], gCalEventIds[i], gCalCalendars[i], notionCalendars[i], notionLocations[i], notionCallLinks[i], notionAttendees[i])
 
-        # Update the necessary fields in Notion Calendar with the updated Google Calendar event info
+        # Update the necessary fields in Notion with the updated Google Calendar event info
         notionEventUpdate = notion.pages.update(
             **{
                 'page_id': page['id'],

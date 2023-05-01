@@ -7,9 +7,9 @@ from helperFunctions import *
 ####################################################################
 
 
-print("Adding new Notion Calendar events to Google Calendar...\n")
+print("Adding new Notion events to Google Calendar...\n")
 
-# Get all of your Notion Calendar events that have not been synced with Google Calendar
+# Get all of your Notion calendar events that have not been synced with Google Calendar
 
 query = {
     'database_id': NOTION_DATABASE_ID, 
@@ -139,7 +139,7 @@ if len(notionPagesResults) > 0:
         # Save the new Google Calendar event ID
         gCalEventIds.append(newGCalEvent['id'])
 
-        # Update the necessary fields in Notion Calendar with the new Google Calendar event info
+        # Update the necessary fields in Notion with the new Google Calendar event info
         notionEventUpdate = notion.pages.update(
             **{
                 'page_id': page['id'],
@@ -193,6 +193,6 @@ if len(notionPagesResults) > 0:
                 }
             )
         
-    print("Finished adding new Notion Calendar events to Google Calendar!\n")
+    print("Finished adding new Notion events to Google Calendar!\n")
 else:
-    print("There are no new Notion Calendar events to add to Google Calendar\n")
+    print("No new Notion events to add to Google Calendar\n")

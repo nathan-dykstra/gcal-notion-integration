@@ -8,6 +8,11 @@
 # Path to the folder you created for this project (include the trailing '/')
 PROJECT_LOCATION = ''
 
+# Whether or not to sync deleted calendar events
+# If this is set to "False", then the program will not sync deleted events
+# If this is set to "True", then the program will sync deleted events
+SYNC_DELETED_EVENTS = True
+
 # ----------------------------------------- NOTION SETUP ------------------------------------------
 
 NOTION_TOKEN = ''
@@ -23,6 +28,11 @@ NOTION_PAGE_URL_ROOT = ''
 # Choose your timezone (use the link below to find your timezone)
 # http://www.timezoneconverter.com/cgi-bin/zonehelp.tzc
 TIMEZONE = 'America/Toronto'
+
+# The timezone difference between GMT and your timezone.
+# For example, the offset for EDT is '-04:00' and the offset for EST '-05:00'.
+# If your timezone has time changes, then you will have to update this (for example Eastern Time changes from EST to EDT)
+TIMEZONE_OFFSET_FROM_GMT = '-04:00'
 
 # The number of weeks to go back in history to sync your calendar events
 # If this is set to -1, then the program will attempt to sync ALL your historical calendar events

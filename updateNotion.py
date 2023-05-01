@@ -8,9 +8,9 @@ from helperFunctions import *
 ##################################################################################
 
 
-print("Updating Notion Calendar events that were changed in Google Calendar...\n")
+print("Updating Notion events that were changed in Google Calendar...\n")
 
-# Get all Notion Calendar events that aren't cancelled
+# Get all Notion calendar events that aren't cancelled
 
 query = {
     'database_id': NOTION_DATABASE_ID,
@@ -151,8 +151,8 @@ for gCalEvent in gCalEvents:
     except:
         gCalAttendees.append([])
 
-# Compare the event IDs from Google Calendar to the event IDs currently in Notion.
-# If an event ID from Google Calendar does not exist in Notion, then that event should be added to the Notion Calendar
+# Compare the Google Calendar event last updated time to the 'Last Synced' time in Notion
+# If the Google Calendar last updated time is greater than the 'Last Synced' time, then the event needs to be updated in Notion
 
 updatedGCalEventIndicies = []
 
@@ -162,9 +162,9 @@ for i in range(len(gCalEvents)):
 
 if len(updatedGCalEventIndicies) > 0:
     for index in updatedGCalEventIndicies:
-        # Update the Notion Calendar event
+        # Update the Notion calendar event
         updatedNotionCalEvent = updateNotionCalEvent(gCalEventNames[index], gCalStartDates[index], gCalEndDates[index], gCalDescriptions[index], gCalLocations[index], gCalCallLinks[index], gCalCreators[index], gCalAttendees[index], gCalCalendarIds[index], notionCalendarNames[index], notionPageIds[index])
     
-    print("Finished updating Notion Calendar events that were changed in Google Calendar!\n")
+    print("Finished updating Notion events that were changed in Google Calendar!\n")
 else:
-    print("No Notion Calendar events to update\n")
+    print("No Notion events to update\n")

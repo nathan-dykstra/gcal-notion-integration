@@ -156,8 +156,7 @@ if len(notionPagesResults) > 0:
             }
         )
 
-        # Handle situation where the Notion 'Calendar' field was changed to 'Unknown' or empty
-        # In these cases the calendar ID associated with the Notion 'Calendar' field will be different than the 'GCal Calendar ID' field
+        # Handle situation where the Notion 'Calendar' field was changed from a valid calendar to 'Unknown' or empty
         if (notionCalendars[i] == UNKNOWN_CALENDAR_ID and gCalCalendars[i] in CALENDAR_DICTIONARY.values()) or (notionCalendars[i] == DEFAULT_CALENDAR_ID and gCalCalendars[i] != DEFAULT_CALENDAR_ID and gCalCalendars[i] in CALENDAR_DICTIONARY.values()):
             notionEventUpdate = notion.pages.update(
                 **{
@@ -165,7 +164,7 @@ if len(notionPagesResults) > 0:
                     'properties': {
                         NOTION_CALENDAR_NAME: {
                             'select': {
-                                "name": list(CALENDAR_DICTIONARY.keys())[list(CALENDAR_DICTIONARY.values()).index(gCalCalendars[i])]
+                                'name': list(CALENDAR_DICTIONARY.keys())[list(CALENDAR_DICTIONARY.values()).index(gCalCalendars[i])]
                             }
                         },
                     }
@@ -174,15 +173,32 @@ if len(notionPagesResults) > 0:
 
         # Handle situation where the Notion 'Calendar' field was change from 'Unknown' to a different calendar
         # This is not permitted, since it would be attempting to move a shared calendar event from the sharer's calendar to your calendar
-        if notionCalendars[i] != UNKNOWN_CALENDAR_ID and gCalCalendars[i] not in CALENDAR_DICTIONARY.values():
+        elif notionCalendars[i] != UNKNOWN_CALENDAR_ID and gCalCalendars[i] not in CALENDAR_DICTIONARY.values():
             notionEventUpdate = notion.pages.update(
                 **{
                     'page_id': page['id'],
                     'properties': {
                         NOTION_CALENDAR_NAME: {
                             'select': {
-                                "name": UNKNOWN_CALENDAR_NAME
+                                'name': UNKNOWN_CALENDAR_NAME
                             }
+                        }
+                    }
+                }
+            )
+
+        # Update the 'GCal Calendar ID' field in Notion if the calendar was changed
+        elif notionCalendars[i] != gCalCalendars[i]:
+            notionEventUpdate = notion.pages.update(
+                **{
+                    'page_id': page['id'],
+                    'properties': {
+                        NOTION_GCAL_CALENDAR_ID: {
+                            'rich_text': [{
+                                'text': {
+                                    'content': CALENDAR_DICTIONARY[notionEventUpdate['properties'][NOTION_CALENDAR_NAME]['select']['name']]
+                                }
+                            }]
                         }
                     }
                 }

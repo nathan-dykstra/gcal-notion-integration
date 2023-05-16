@@ -4,7 +4,7 @@
 
 Hey everyone! This is an integration between Notion and Google Calendar that I've been working on recently. It provides free, unlimited two-way synchronization between your Notion Calendar database and your Google Calendar.
 
-Right off the bat, I want to give some credit to [akarri2001](https://github.com/akarri2001). I've been looking for a Notion + Google Calendar integration for a while, but I haven't been satisfied with the free tier of products like Zapier. When I decided to create my own, I came across [akarri2001's](https://github.com/akarri2001) [Notion-and-Google-Calendar-2-Way-Sync](https://github.com/akarri2001/Notion-and-Google-Calendar-2-Way-Sync) project. That helped me a lot with setting up the API connections and gave me tons of inspiration for how to organize my code and implement some of the features. Cheers [akarri2001](https://github.com/akarri2001)!
+Right off the bat, I want to give some credit to [akarri2001](https://github.com/akarri2001). I've been looking for a Notion + Google Calendar integration for a while, but I haven't been satisfied with the free tier of products like Zapier. When I decided to create my own, I came across [akarri2001's](https://github.com/akarri2001) [Notion-and-Google-Calendar-2-Way-Sync](https://github.com/akarri2001/Notion-and-Google-Calendar-2-Way-Sync) project. That helped me set up the API connections and gave me a lots of inspiration. Cheers [akarri2001](https://github.com/akarri2001)!
 
 I hope you find this useful! Feel free to add suggestions for features you would like, and I will consider adding them. Or dig into the code and modify it however you want on your own :)
 

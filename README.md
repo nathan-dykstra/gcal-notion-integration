@@ -4,11 +4,9 @@
 
 Hey everyone! This is an integration between Notion and Google Calendar that I've been working on recently. It provides free, unlimited two-way synchronization between your Notion Calendar database and your Google Calendar.
 
-Right off the bat, I want to give some credit to [akarri2001](https://github.com/akarri2001). I've been looking for a Notion + Google Calendar integration for a while, but I haven't been satisfied with the free tier of products like Zapier. When I decided to create my own, I came across [akarri2001's](https://github.com/akarri2001) [Notion-and-Google-Calendar-2-Way-Sync](https://github.com/akarri2001/Notion-and-Google-Calendar-2-Way-Sync) project. That helped me set up the API connections and gave me a lots of inspiration. Cheers [akarri2001](https://github.com/akarri2001)!
+I've been looking for a Notion + Google Calendar integration for a while, but I haven't been satisfied with the free tier of products like Zapier. When I decided to create my own, I came across [akarri2001](https://github.com/akarri2001)'s [Notion-and-Google-Calendar-2-Way-Sync](https://github.com/akarri2001/Notion-and-Google-Calendar-2-Way-Sync) project which helped me set up the API connections and gave me a lots of inspiration. Cheers akarri2001!
 
 I hope you find this useful! Feel free to add suggestions for features you would like, and I will consider adding them. Or dig into the code and modify it however you want on your own :)
-
-FYI I will also be working on a Google Tasks + Notion feature to sync your tasks, reminders, and to-dos.
 
 ## Features
 - Sync Google Calendar events to Notion calendar database.
@@ -46,7 +44,7 @@ FYI I will also be working on a Google Tasks + Notion feature to sync your tasks
 
 ## Setup Instructions
 
-Step-by-step setup instructions will be available shortly. The setup process will probably take around 30 minutes. It does involve editing a few lines of code, but the changes are very minor and will be well-documented in the instructions - so even if you are not tech savvy, you can probably still get it working!
+Step-by-step setup instructions will be available shortly. The setup process will probably take around 30 minutes.
 
 ## Usage Notes
 - To run: `python syncGCalAndNotion.py`
@@ -57,12 +55,10 @@ Step-by-step setup instructions will be available shortly. The setup process wil
   - Sync updates from Notion to Google Calendar: `python updateGCal.py`
   - Sync update from Google Calendar to Notion: `python updateNotion.py`
 - If you choose not to add date range restrictions, the sync will take a lot longer depending on how many calendar events you have (I ran the program without any date range restrictions, which imported almost 500 Google Calendar events to Notion. It worked fine, but took 5-10 minutes to complete).
-  - This is one of the reasons why I recommend only doing a full sync without date restrictions the first time you run the program.
 - If you add new attendees to an event in Notion, just make sure to change the colour to "Light gray."
-- You don't need to specify the event creator in Notion. This is filled out automatically with the creator of the Google Calendar event (so even if you specify your own creator, it will be overwritten with the actual Google Calendar event creator).
+- You don't need to specify the event creator in Notion. This is filled out automatically with the creator of the Google Calendar event.
 - Just like your Google apps, you'll have to re-authenticate your Google account every few weeks.
   - You can manually re-authenticate by running `python gCalApiToken.py`, just like you did when you set it up.
   - If you are running the program manually, then it should prompt you to follow a URL to re-authenticate your Google account which will give you a code to paste back into the command prompt/terminal.
   - If you scheduled the program, then you will notice that the code isn't running and your events aren't syncing. You'll have to manually run the program once, and follow the steps in the bullet point above.
-    - I'll try to figure out if it's possible to make it notify you somehow when this happens.
 - You'll notice that several properties are hidden by default in the Notion calendar event pages. They help facilitate the sync and are updated automatically when running the program. Please do not edit the content of those properties, or the program might not function correctly!

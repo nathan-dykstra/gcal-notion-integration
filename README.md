@@ -6,7 +6,7 @@ Hey everyone! This is an integration between Notion and Google Calendar that I'v
 
 I want to give some credit to [akarri2001](https://github.com/akarri2001). I've been looking for a Notion + Google Calendar integration for a while, but I haven't been satisfied with the free products. When I decided to create my own, I came across akarri2001's [Notion-and-Google-Calendar-2-Way-Sync](https://github.com/akarri2001/Notion-and-Google-Calendar-2-Way-Sync) project which helped a lot with setting up the API connections. Cheers akarri2001!
 
-I have built a Google Tasks integration as well available [here](https://github.com/nathan-dykstra/gtasks-notion-integration).
+I also built a Google Tasks integration as well available [here](https://github.com/nathan-dykstra/gtasks-notion-integration).
 
 ## Features
 - Sync Google Calendar events to Notion calendar database.
@@ -19,12 +19,11 @@ I have built a Google Tasks integration as well available [here](https://github.
   - Specify each Google Calendar you want to sync with Notion, and the program will only look in those calendars when adding/updating events.
   - If an event is shared with your Google Calendar, it will be added to the "Unknown" calendar in Notion since the event is not owned by your Google account.
   - Supports changing events from one calendar to another (in Notion and Google Calendar).
-- Syncs cancelled/deleted events* (see limitations).
+- Syncs cancelled/deleted events* (see [Limitations](#limitations)).
 - Can create and sync events with a single date only, or a single date + time, or two dates, or two dates + times.
   - Events will be added as "All-Day" events in Google Calendar when appropriate.
-- No date limits on what events will be synced - you can sync all your historical and future events if you want! (Up to 500 events per calendar for the Google to Notion sync).
 - Ability to add date ranges so the program will only sync events that are a specified number of weeks into the past/future - makes the program run much quicker (and you will probably never update past events anyways).
-- Ability to run individual sections of the code separately (the code is broken into five main steps). For example, you can just do a one-time import of your Google Calendar events to Notion. The commands are in Usage Notes.
+- Ability to run individual sections of the code separately (the code is broken into five main steps). For example, you can just do a one-time import of your Google Calendar events to Notion. See [Usage Notes](#usage-notes).
 - Run the program at scheduled intervals using tools like Windows Event Scheduler (instructions will be included in the setup documentation).
 
 ## Limitations

@@ -42,7 +42,7 @@ I have built a Google Tasks integration as well available [here](https://github.
 
 ## Setup Instructions
 
-Step-by-step setup instructions will be available shortly. The setup process will probably take around 30 minutes. It does involve editing a few lines of code, but the changes are very minor and will be well-documented in the instructions - so even if you are not tech savvy, you can probably still get it working!
+Step-by-step setup instructions will be available shortly. The setup process will probably take around 30 minutes.
 
 ## Usage Notes
 To run: 

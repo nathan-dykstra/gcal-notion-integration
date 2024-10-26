@@ -31,7 +31,7 @@ I also built a Google Tasks integration as well available [here](https://github.
 - Events that are added in Notion without a date will not be synced. Notion supports calendar events without a date, but Google Calendar does not.
 - Currently this program will sync video call links (i.e. Google Meets) from Google Calendar to Notion, but it doesn't work the other way.
 - Recurring Google Calendar events are broken up into their individual occurrences when synced with Notion. Unfortunately Notion doesn't currently have a recurring event feature (so if you have a Google Calendar event that repeats 10 times, you'll end up with 10 separate events in Notion).
-- You'll have to use [my Notion calendar database template](https://nathan-dykstra-personal.notion.site/3414bbbb4d6a4766b2691f6a5ba55263?v=b3228cb5c87f4f9ea88d027ee632f2a1&pvs=73).
+- You'll have to use [my Notion calendar database template](https://nathan-dykstra.notion.site/3414bbbb4d6a4766b2691f6a5ba55263?v=b3228cb5c87f4f9ea88d027ee632f2a1&pvs=73).
   - You can change the property names if you'd like.
   - You can add extra properties to the Notion database, but they will not be synced with Google Calendar.
 - The Notion API does not allow deleting pages. To sync deleted events, I added a "Cancelled" property in Notion.
